@@ -9,7 +9,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
-export default function Header() {
+interface HeaderProps {
+  toggleDrawer: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ toggleDrawer }) =>{
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -33,7 +37,7 @@ export default function Header() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <MenuIcon onClick={toggleDrawer}/>
           </IconButton>
           <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
             Talent Care
@@ -75,3 +79,5 @@ export default function Header() {
     </Box>
   );
 }
+
+export default Header;

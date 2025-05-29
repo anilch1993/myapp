@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -11,17 +10,13 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import List from "@mui/material/List";
 import type { SideBarNavProps } from "../models/SideBarRouteProps";
+import { AppContext } from "../context/app.context";
 
-
-export default function SideBar({routesData}: SideBarNavProps) {
-  const [open, setOpen] = React.useState(false);
-
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
-  };
+export default function SideBar({ routesData }: SideBarNavProps) {
+  const toggle = React.useContext(AppContext);
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 250 }} role="presentation">
       <List>
         {routesData?.map((data, index) => {
           if (data.id === "divider") {
@@ -44,11 +39,14 @@ export default function SideBar({routesData}: SideBarNavProps) {
   );
 
   return (
-    <div>
-      <Button onClick={toggleDrawer(true)}>Open drawer</Button>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
-      </Drawer>
-    </div>
+    <>
+      {toggle && (
+        <div>
+          <Drawer open={Boolean(toggle)} onClose={() => {}}>
+            {DrawerList}
+          </Drawer>
+        </div>
+      )}
+    </>
   );
 }

@@ -14,9 +14,8 @@ function App() {
   }
   return (
     <>
-    
-      <AppContext.Provider value={{toggle, toggleSideBar}}>
-        <Header />
+      <AppContext.Provider value={toggle}>
+        <Header toggleDrawer={toggleSideBar} />
         <SideBar routesData={StudentsRoutesList} />
       </AppContext.Provider>
     </>

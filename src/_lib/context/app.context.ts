@@ -1,9 +1,6 @@
 import { createContext } from "react";
 
-interface AppContextType {
-    toggle: boolean;
-    toggleSideBar: () => void;
-}
+type toggle = boolean;
 
-export const AppContext = createContext<AppContextType | null>(null);
+export const AppContext = createContext<toggle>(false);
 
